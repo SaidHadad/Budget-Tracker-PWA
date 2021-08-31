@@ -43,43 +43,42 @@ function uploadTransaction() {
     // open a transaction on the db
     const transaction = db.transaction(['new_transaction'], 'readwrite');
 
-    // access object store
-    const budgetObjectStore = transaction.objectStore('new_transaction');
+  // access your object store
+  const budgetObjectStore = transaction.objectStore('new_transaction');
 
-    // get records from store, set to variable
-    const getAll = budgetObjectStore.getAll();
+  // get all records from store and set to a variable
+  const getAll = budgetObjectStore.getAll();
 
-    // upon successful .getAll()
-    getAll.onsuccess = function () {
-        // if there was data in store
-        if (getAll.result.length > 0) {
-            fetch('/api/transaction', {
-                method: 'POST',
-                body: JSON.stringify(getAll.result),
-                headers: {
-                    Accept: 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(serverResponse => {
-                    if (serverResponse.message) {
-                        throw new Error(serverResponse);
-                    }
-                    // open another transaction
-                    const transaction = db.transaciton(['new_transaction'], 'readwrite');
-                    //access new_trans object store
-                    const budgetObjectStore = transaction.objectStore('new_transaction');
-                    // clear all items in store
-                    budgetObjectStore.clear();
-
-                    alert('All saved transactions have been submitted.');
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+  // upon a successful .getAll() execution, run this function
+  getAll.onsuccess = function () {
+    // if there was data in indexedDb's store, let's send it to the api server
+    if (getAll.result.length > 0) {
+      fetch('/api/transaction', {
+        method: 'POST',
+        body: JSON.stringify(getAll.result),
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
         }
-    };
+      })
+      .then(response => response.json())
+      .then(serverResponse => {
+        if (serverResponse.message) {
+            throw new Error(serverResponse);
+        }
+        // open another transaction
+        const transaction = db.transaciton(['new_transaction'], 'readwrite');
+        //access new_trans object store
+        const budgetObjectStore = transaction.objectStore('new_transaction');
+        // clear all items in store
+        budgetObjectStore.clear();
+        alert('All saved transactions have been submitted.');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+  };
 };
 
 //listen for app coming back online
