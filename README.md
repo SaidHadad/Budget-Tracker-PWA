@@ -6,9 +6,9 @@
   Update of an existing budget tracker application to allow for offline access and functionality. 
 
   <!-- DEPLOYED LINK -->
-  Video: https://drive.google.com/file/d/1QHkBbB8QjuStJrIie6aQoa4BqGvnyr-L/view
+  Live link: https://saids-budget-tracker.herokuapp.com/ 
   <br>
-  GitHub repository URL: https://github.com/SaidHadad/Challenge-13-ORM-E-commerce-Back-End
+  GitHub repository URL: https://github.com/SaidHadad/Budget-Tracker-PWA
 
   <!-- TABLE OF CONTENTS -->
   <details open="open">
@@ -51,7 +51,7 @@
 
   * Node.js
   * MongoDB 
-  * express.js
+  * Express.js
 
   ### Installation
 
