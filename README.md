@@ -3,7 +3,7 @@
   
   <!-- DESCRIPTION -->
   <p align="center">
-  Update of an existing budget tracker application to allow for offline access and functionality. 
+  Update of an existing budget tracker application to allow for offline access and functionality. <br>
 
   <!-- DEPLOYED LINK -->
   Live link: https://saids-budget-tracker.herokuapp.com/ 
